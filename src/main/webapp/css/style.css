@@ -116,13 +116,13 @@ body {
 }
 
 .winner-screen button {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 1000;
   color: #7fa182;
   background-color: #b7e8bb;
   border-color: #7fa182;
   border-width: 10px;
-  padding: 50px;
+  padding: 30px;
 }
 
 
