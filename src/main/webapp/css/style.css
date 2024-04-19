@@ -124,3 +124,32 @@ body {
   border-width: 10px;
   padding: 50px;
 }
+
+
+.winner-screen {
+  z-index: 10; /* Higher than the board's z-index */
+  display: none; /* Start hidden and display it only when there's a winner */
+}
+
+.board {
+  z-index: 1; /* Lower than the winner-screen */
+}
+
+/* Wraps all game elements and centers them as a column */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Apply this class to each direct child of .game-container */
+.game-element {
+  margin: 10px 0; /* Adds space between elements */
+}
+
+.playerX-info, .playerO-info {
+  top: 50%; /* Center vertically in the middle */
+  transform: translateY(-50%); /* Only shift vertically */
+}

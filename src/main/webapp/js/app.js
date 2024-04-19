@@ -1,78 +1,59 @@
-let playerX = document.querySelector(".playerX-info");
-let playerO = document.querySelector(".playerO-info");
-let board = document.querySelectorAll(".board .grid-item");
-let announceWinner = document.querySelector(".winner-screen");
+document.addEventListener('DOMContentLoaded', function() {
+  const ws = new WebSocket('ws://localhost:8080/TicTacToe-1.0-SNAPSHOT/game');
 
-let currentPLayer = "";
+  ws.onopen = function() {
+    console.log("Connected to the server.");
+  };
 
-window.onload = () => {
-  document.querySelector(".game-screen").style.visibility = "hidden";
-  document.querySelector(".choose-player").style.visibility = "hidden";
-  document.querySelector(".winner-screen").style.visibility = "hidden"
+  ws.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    switch(data.type) {
+      case "update":
+        updateBoard(data.board);
+        break;
+      case "gameOver":
+        showWinner(data.winner);
+        break;
+      case "turn":
+        alert("It's your turn to play as " + data.symbol);
+        break;
+      default:
+        alert(data.message);
+        break;
+    }
+  };
 
-  for (let i = 0; i < 9; i++) {
-    board[i].setAttribute("onclick", "selectedBox(this)");
-  }
-}
+  ws.onerror = function(event) {
+    console.error("WebSocket error: ", event);
+  };
 
-function playGame() {
-  document.querySelector(".play-game").style.visibility = "hidden";
-  document.querySelector(".choose-player").style.visibility = "visible";
-}
+  ws.onclose = function(event) {
+    console.log("WebSocket is closed now.");
+  };
 
-function startAsX() {
-  document.querySelector(".choose-player").style.visibility = "hidden";
-  document.querySelector(".game-screen").style.visibility = "visible";
-  currentPLayer = "X";
-}
+  document.querySelectorAll('.grid-item').forEach(item => {
+    item.addEventListener('click', function() {
+      const id = parseInt(this.id.replace('cell-', ''), 10);
+      const row = Math.floor(id / 3);
+      const col = id % 3;
+      ws.send(JSON.stringify({action: "move", symbol: "X", id: id}));
+    });
+  });
+});
 
-function startAsO() {
-  document.querySelector(".choose-player").style.visibility = "hidden";
-  document.querySelector(".game-screen").style.visibility = "visible";
-  currentPLayer = "O";
-}
+function updateBoard(board) {
+  m = 0
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; i < 3; j++) {
 
-function selectedBox(element) {
-  while ("" === element.innerHTML) {
-    if (currentPLayer === "X") {
-      element.innerHTML += "X";
-      currentPLayer = "O";
-    } else {
-      if (currentPLayer ==="O") {
-        element.innerHTML += "O";
-        currentPLayer = "X";
-      }
+      document.getElementsByClassName("grid-item")[m].textContent = board[i][j];
+
+      m++;
     }
   }
-  winner(element);
+
 }
 
-function checkBox(element) {
-  return board.item(element).innerHTML;
-}
-
-function checkGrid(box1, box2, box3, player) {
-  if (checkBox(box1) === player && checkBox(box2) === player && checkBox(box3) === player) {
-    return true;
-  }
-}
-
-function winner(element) {
-  if (checkGrid(0,1,2,element.innerHTML) || checkGrid(3,4,5,element.innerHTML) ||
-    checkGrid(6,7,8,element.innerHTML) || checkGrid(0,3,6,element.innerHTML) ||
-    checkGrid(1,4,7,element.innerHTML) || checkGrid(2,5,8,element.innerHTML) ||
-    checkGrid(0,4,8,element.innerHTML) || checkGrid(2,4,6,element.innerHTML)) {
-
-    let announcement =document.createTextNode("Congratulations Player " + element.innerHTML + ", you have won the game!");
-    document.querySelector(".announcement").appendChild(announcement);
-
-    document.querySelector(".game-screen").style.visibility = "hidden";
-    document.querySelector(".winner-screen").style.visibility = "visible";
-
-
-  }
-}
-
-function replay() {
-  window.location.reload();
+function showWinner(winner) {
+  alert("Winner is " + winner);
 }
