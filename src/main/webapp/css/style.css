@@ -163,3 +163,8 @@ body {
   top: 50%; /* Center vertically in the middle */
   transform: translateY(-50%); /* Only shift vertically */
 }
+
+.info {
+  position:absolute; width: 50%
+
+}

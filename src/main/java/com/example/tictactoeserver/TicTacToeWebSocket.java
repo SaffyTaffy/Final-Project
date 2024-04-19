@@ -19,6 +19,7 @@ public class TicTacToeWebSocket {
         clearBoard();
     }
 
+    // on load display instructions
     @OnOpen
     public void onOpen(Session session) throws IOException {
         if (playerSessions.size() < 2) {
@@ -36,6 +37,8 @@ public class TicTacToeWebSocket {
         }
     }
 
+
+    //decode what row to update based on index and broadcast
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         JSONObject json = new JSONObject(message);
@@ -66,6 +69,8 @@ public class TicTacToeWebSocket {
         throwable.printStackTrace();
     }
 
+
+    // send board update
     private void broadcastBoard() throws IOException {
         JSONArray jsonBoard = new JSONArray(board);
         JSONObject message = new JSONObject();

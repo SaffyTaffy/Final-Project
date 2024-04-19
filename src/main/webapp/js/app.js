@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
   const ws = new WebSocket('ws://localhost:8080/TicTacToe-1.0-SNAPSHOT/game');
 
+  //on load
   ws.onopen = function() {
     console.log("Connected to the server.");
   };
 
+  // differentiate websocket messages
   ws.onmessage = function(event) {
     const data = JSON.parse(event.data);
     switch(data.type) {
@@ -31,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("WebSocket is closed now.");
   };
 
+  // for each grid item make it clickable and send an update to server, occluding the player from making another move
+  // until the other player makes a move
   document.querySelectorAll('.grid-item').forEach(item => {
     item.addEventListener('click', function() {
       const id = this.id
@@ -41,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+
+//parse WS data and render on board
 function updateBoard(board) {
   m = 0
   for (let i = 0; i < 3; i++) {
@@ -53,6 +59,8 @@ function updateBoard(board) {
   }
 
 }
+
+//provide tooltip update
 function infoUpdate(info){
   document.querySelector(".info").innerHTML = info
 }
