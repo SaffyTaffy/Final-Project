@@ -23,3 +23,5 @@
 7. When the program is loaded, confirm a GlassFish Server configuration has been added before running.
 8. Once a configuration has been established, run the server, to have the game open in your default (or otherwise specified) browser.
 9. You may now play Tic Tac Toe!
+
+### Game Instructions
