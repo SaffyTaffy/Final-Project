@@ -1,16 +1,16 @@
-#Final Project
+# Final Project
 
-##Contributers and Relative Contributions
+## Contributers and Relative Contributions
 - Saffron Birch: 50%
 - Raphael Bomshakian: 50%
 - Justin Chan: 0%
 - Jevin Chen: 0%
 
-##Overview
+## Overview
 
 
-##How To Run
-###Cloning Instructions
+## How To Run
+### Cloning Instructions
 1. Install git on the device where you wish to access the repository.
 2. Clone the necessary files using one of the following methods:
 >To clone using HTTPS, copy the link under “<> Code” in the upper right-hand side of the page.
