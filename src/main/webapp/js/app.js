@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const id = this.id
 
       ws.send(JSON.stringify({action: "move", symbol: "X", id: id}));
+      this.document.getElementsByClassName("obscuraoff")[0].className = "obscura"
     });
   });
 });

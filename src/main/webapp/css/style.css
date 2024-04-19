@@ -143,7 +143,17 @@ body {
   justify-content: center;
   height: 100vh; /* Full viewport height */
 }
+.obscura{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 50%;
+}
+.obscuraoff{
+  display: none;
 
+}
 /* Apply this class to each direct child of .game-container */
 .game-element {
   margin: 10px 0; /* Adds space between elements */
