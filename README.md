@@ -7,6 +7,7 @@
 - Jevin Chen: 0%
 
 ## Overview
+The program allows for 2 players to compete against each other in a game of Tic Tac Toe. It allows users to interact through HTTPS requests, where API server provides endpoints for various actions related to setting up and playing the game. Upon starting the server, a new game is initialized with each player being given their corresponding symbol (either "X" or "O"). Players can then make moves by specifying the position where they want to place their symbol. The goal of the game is to occupy 3 squares in a row, either hotizontally, vertically, or diagonally.
 
 
 ## How To Run
@@ -23,5 +24,3 @@
 7. When the program is loaded, confirm a GlassFish Server configuration has been added before running.
 8. Once a configuration has been established, run the server, to have the game open in your default (or otherwise specified) browser.
 9. You may now play Tic Tac Toe!
-
-### Game Instructions
