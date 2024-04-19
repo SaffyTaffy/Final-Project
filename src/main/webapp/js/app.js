@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
         updateBoard(data.board);
         break;
       case "gameOver":
-        showWinner(data.winner);
+        infoUpdate("Winner is " + data.winner);
         break;
       case "turn":
-        alert("It's your turn to play as " + data.symbol);
+        infoUpdate("It's your turn to play as " + data.symbol);
         break;
       default:
-        alert(data.message);
+        infoUpdate(data.message);
         break;
     }
   };
@@ -33,9 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelectorAll('.grid-item').forEach(item => {
     item.addEventListener('click', function() {
-      const id = parseInt(this.id.replace('cell-', ''), 10);
-      const row = Math.floor(id / 3);
-      const col = id % 3;
+      const id = this.id
+
       ws.send(JSON.stringify({action: "move", symbol: "X", id: id}));
     });
   });
@@ -44,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function updateBoard(board) {
   m = 0
   for (let i = 0; i < 3; i++) {
-    for (let j = 0; i < 3; j++) {
+    for (let j = 0; j < 3; j++) {
 
       document.getElementsByClassName("grid-item")[m].textContent = board[i][j];
 
@@ -53,7 +52,6 @@ function updateBoard(board) {
   }
 
 }
-
-function showWinner(winner) {
-  alert("Winner is " + winner);
+function infoUpdate(info){
+  document.querySelector(".info").innerHTML = info
 }
